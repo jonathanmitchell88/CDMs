@@ -1,4 +1,5 @@
 -- CDM 5
+-- We want to find the set of equations that can be used to solve for the parameters of CDM 5.
 
 -- r_1=r0011
 -- r_2=r0101
