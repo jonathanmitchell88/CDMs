@@ -14,7 +14,7 @@
 -- r_11=r1111
 -- r_12=delta
 
--- To solve for the x parameters we want a set of r parameters with as large a cardinality as possible such that no r parameters are functions of other r parameters in the set. q1111 depends on both r_11 and r_12, with no other qs depending on r_11 or r_12. Thus, at most only one of r_11 and r_12 can be included in the set. We find the largest cardinality set of the parameters {r_1..r_10} and at most one of r_11 and r_12.
+-- To solve for the x parameters we want a set of rs with as large a cardinality as possible such that no rs are functions of other rs in the set. q1111 depends on both r_11 and r_12, with no other qs depending on r_11 or r_12. Thus, at most only one of r_11 and r_12 can be included in the set. We find the largest cardinality set that includes at most one of r_11 and r_12.
 
 S=QQ
 R=S[x_1..x_11,r_1..r_12,MonomialOrder=>{GRevLex=>11,GRevLex=>12}]
@@ -27,11 +27,11 @@ I3=eliminate(I2,{x_1,x_2,x_3,x_4,x_5,x_6,x_7,x_8,x_9,x_10,x_11,r_11})
 
 -- I3 has no generators that are functions of r_12. Thus, r_12 is in the set. (We have not checked whether r_11 could be included in the set without r_12, but this is not necessary.)
 
--- We have eliminated 12 parameters. Thus, the cardinality of the set of r parameters is:
+-- We have eliminated 12 variables. Thus, the cardinality of the set is:
 
 dim I3-12
 
--- gamma is another parameter to include in the set. Thus, the cardinality of the set including gamma is:
+-- gamma is another variable to include in the set. Thus, the cardinality of the set including gamma is:
 
 dim I3-12+1
 
