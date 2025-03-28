@@ -1,0 +1,1410 @@
+Text output of S12.nb
+
+####################
+# Article: Convergence-divergence models: Generalizations of phylogenetic trees modeling gene flow over time
+# Journal: For peer review in the Bulletin of Mathematical Biology
+# Authors: Jonathan D. Mitchell (1,2*) and Barbara R. Holland (1,2)
+# Affiliations: 1) School of Natural Sciences (Mathematics), University of Tasmania, Hobart, TAS, Australia, 2) ARC Centre of Excellence for Plant Success in Nature and Agriculture, University of Tasmania, Hobart, TAS, Australia.
+# Corresponding author e-mail: jonathanmitchell88@gmail.com
+####################
+
+Markov generators of Sumner et. al. 2012
+
+La = {{-1, 0}, {1, 0}};
+
+Lb = {{0, 1}, {0, -1}};
+
+Identity matrix
+
+Id = {{1, 0}, {0, 1}};
+
+Stationary distribution at the root (a1=b1)
+
+p0s = {{1/2}, {0}, {0}, {0}, {0}, {0}, {0}, {0}, {0}, {0}, {0}, {0}, {0}, \
+{0}, {0}, {1/2}};
+
+2*2 Hadamard matrix
+
+H2 = {{1, 1}, {1, -1}};
+
+16*16 Hadamard matrix
+
+H = KroneckerProduct[H2, KroneckerProduct[H2, KroneckerProduct[H2, H2]]];
+
+Construct phylogenetic tensor for CDM N_{4,1} (a1=b1)
+
+Transition matrix for section of edge 1 below the root and not ancestral to outgroup o
+
+M1 = FullSimplify[
+   MatrixExp[(1 - t)*
+     a1*(KroneckerProduct[Id, 
+        KroneckerProduct[La, KroneckerProduct[La, La]]] + 
+       KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[La, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[Id, La]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, La]]] + 
+       KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[Id, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Id, La]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Lb, Lb]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Lb, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Id, Lb]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Lb]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Id, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Id]]] + 
+       KroneckerProduct[Id, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Lb]]])]];
+
+Transition matrix for edge corresponding to parameter 2
+
+M2 = FullSimplify[
+   MatrixExp[
+    a2*(KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, La]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, Id]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Id, La]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Lb]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Id]]] +
+        KroneckerProduct[Id, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Lb]]])]];
+
+Transition matrix for edge corresponding to parameter 3
+
+M3 = FullSimplify[
+   MatrixExp[
+    a3*(KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[Id, Id]]] +
+        KroneckerProduct[Id, 
+        KroneckerProduct[Lb, KroneckerProduct[Id, Id]]])]];
+
+Transition matrix for section of edge 1 below the root and ancestral to o
+
+M4 = FullSimplify[
+   MatrixExp[
+    t*a1*(KroneckerProduct[La, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Id]]] + 
+       KroneckerProduct[Lb, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Id]]])]];
+
+P = H.M4.M3.M2.M1.p0s;
+
+Elements of the transformed phylogenetic tensor
+
+q0000 = Simplify[P[[1]][[1]]];
+
+q0001 = Simplify[P[[2]][[1]]];
+
+q0010 = Simplify[P[[3]][[1]]];
+
+q0011 = Simplify[P[[4]][[1]]];
+
+q0100 = Simplify[P[[5]][[1]]];
+
+q0101 = Simplify[P[[6]][[1]]];
+
+q0110 = Simplify[P[[7]][[1]]];
+
+q0111 = Simplify[P[[8]][[1]]];
+
+q1000 = Simplify[P[[9]][[1]]];
+
+q1001 = Simplify[P[[10]][[1]]];
+
+q1010 = Simplify[P[[11]][[1]]];
+
+q1011 = Simplify[P[[12]][[1]]];
+
+q1100 = Simplify[P[[13]][[1]]];
+
+q1101 = Simplify[P[[14]][[1]]];
+
+q1110 = Simplify[P[[15]][[1]]];
+
+q1111 = Simplify[P[[16]][[1]]];
+
+r parameters and delta
+
+r0011 = 1;
+
+r0101 = x2*x3;
+
+r0110 = x2*x3;
+
+r1001 = x1*x2;
+
+r1010 = x1*x2;
+
+r1100 = x1*x3;
+
+r1111 = x1*x3;
+
+Elements of the phylogenetic tensor, as expressed in the proof of Theorem 4 of the online appendices and supplementary material. We will show that the two forms of the phylogenetic tensor element expressions here are equal.
+
+q0000a = 1;
+
+q0001a = 0;
+
+q0010a = 0;
+
+q0011a = r0011;
+
+q0100a = 0;
+
+q0101a = r0101;
+
+q0110a = r0110;
+
+q0111a = 0;
+
+q1000a = 0;
+
+q1001a = r1001;
+
+q1010a = r1010;
+
+q1011a = 0;
+
+q1100a = r1100;
+
+q1101a = 0;
+
+q1110a = 0;
+
+q1111a = r1111;
+
+Substitute in a1,a2,a3 and gamma so that q0000b,q0001b,...,q1111b are expressed in terms of the same parameters as q0000,q0001,...,q1111.
+
+q0000b = q0000a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3]};
+
+q0001b = q0001a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3]};
+
+q0010b = q0010a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3]};
+
+q0011b = q0011a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3]};
+
+q0100b = q0100a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3]};
+
+q0101b = q0101a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3]};
+
+q0110b = q0110a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3]};
+
+q0111b = q0111a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3]};
+
+q1000b = q1000a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3]};
+
+q1001b = q1001a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3]};
+
+q1010b = q1010a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3]};
+
+q1011b = q1011a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3]};
+
+q1100b = q1100a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3]};
+
+q1101b = q1101a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3]};
+
+q1110b = q1110a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3]};
+
+q1111b = q1111a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3]};
+
+Check whether expressions are equal or not.
+
+Simplify[q0000b - q0000]
+
+0
+
+Simplify[q0001b - q0001]
+
+0
+
+Simplify[q0010b - q0010]
+
+0
+
+FullSimplify[q0011b - q0011]
+
+0
+
+FullSimplify[q0100b - q0100]
+
+0
+
+FullSimplify[q0101b - q0101]
+
+0
+
+FullSimplify[q0110b - q0110]
+
+0
+
+FullSimplify[q0111b - q0111]
+
+0
+
+FullSimplify[q1000b - q1000]
+
+0
+
+FullSimplify[q1001b - q1001]
+
+0
+
+FullSimplify[q1010b - q1010]
+
+0
+
+FullSimplify[q1011b - q1011]
+
+0
+
+FullSimplify[q1100b - q1100]
+
+0
+
+FullSimplify[q1101b - q1101]
+
+0
+
+FullSimplify[q1110b - q1110]
+
+0
+
+FullSimplify[q1111b - q1111]
+
+0
+
+Construct phylogenetic tensor for CDM N_{4,2} (a1=b1)
+
+Transition matrix for section of edge 1 below the root and not ancestral to outgroup o
+
+M1 = FullSimplify[
+   MatrixExp[(1 - t)*
+     a1*(KroneckerProduct[Id, 
+        KroneckerProduct[La, KroneckerProduct[La, La]]] + 
+       KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[La, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[Id, La]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, La]]] + 
+       KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[Id, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Id, La]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Lb, Lb]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Lb, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Id, Lb]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Lb]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Id, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Id]]] + 
+       KroneckerProduct[Id, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Lb]]])]];
+
+Transition matrix for edge corresponding to parameter 2
+
+M2 = FullSimplify[
+   MatrixExp[
+    a2*(KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, La]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, Id]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Id, La]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Lb]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Id]]] +
+        KroneckerProduct[Id, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Lb]]])]];
+
+Transition matrix for edge corresponding to parameter 3
+
+M3 = FullSimplify[
+   MatrixExp[
+    a3*(KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[Id, Id]]] +
+        KroneckerProduct[Id, 
+        KroneckerProduct[Lb, KroneckerProduct[Id, Id]]])]];
+
+Transition matrix for edge corresponding to parameter 4
+
+M4 = FullSimplify[
+   MatrixExp[
+    a4*(KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[La, La]]] +
+        KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[La, Id]]] +
+        KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[Id, La]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, La]]] +
+        KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[Id, Id]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, Id]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Id, La]]] +
+        KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Lb, Lb]]] +
+        KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Lb, Id]]] +
+        KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Id, Lb]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Lb]]] +
+        KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Id, Id]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Id]]] +
+        KroneckerProduct[Id, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Lb]]])]];
+
+Transition matrix for section of edge 1 below the root and ancestral to o
+
+M5 = FullSimplify[
+   MatrixExp[
+    t*a1*(KroneckerProduct[La, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Id]]] + 
+       KroneckerProduct[Lb, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Id]]])]];
+
+P = H.M5.M4.M3.M2.M1.p0s;
+
+Elements of the transformed phylogenetic tensor
+
+q0000 = Simplify[P[[1]][[1]]];
+
+q0001 = Simplify[P[[2]][[1]]];
+
+q0010 = Simplify[P[[3]][[1]]];
+
+q0011 = Simplify[P[[4]][[1]]];
+
+q0100 = Simplify[P[[5]][[1]]];
+
+q0101 = Simplify[P[[6]][[1]]];
+
+q0110 = Simplify[P[[7]][[1]]];
+
+q0111 = Simplify[P[[8]][[1]]];
+
+q1000 = Simplify[P[[9]][[1]]];
+
+q1001 = Simplify[P[[10]][[1]]];
+
+q1010 = Simplify[P[[11]][[1]]];
+
+q1011 = Simplify[P[[12]][[1]]];
+
+q1100 = Simplify[P[[13]][[1]]];
+
+q1101 = Simplify[P[[14]][[1]]];
+
+q1110 = Simplify[P[[15]][[1]]];
+
+q1111 = Simplify[P[[16]][[1]]];
+
+r parameters and delta
+
+r0011 = 1;
+
+r0101 = 1 - x4*(1 - x2*x3);
+
+r0110 = 1 - x4*(1 - x2*x3);
+
+r1001 = x1*x2*x4;
+
+r1010 = x1*x2*x4;
+
+r1100 = x1*x3*x4;
+
+r1111 = x1*x3*x4;
+
+Elements of the phylogenetic tensor, as expressed in the proof of Theorem 4 of the online appendices and supplementary material. We will show that the two forms of the phylogenetic tensor element expressions here are equal.
+
+q0000a = 1;
+
+q0001a = 0;
+
+q0010a = 0;
+
+q0011a = r0011;
+
+q0100a = 0;
+
+q0101a = r0101;
+
+q0110a = r0110;
+
+q0111a = 0;
+
+q1000a = 0;
+
+q1001a = r1001;
+
+q1010a = r1010;
+
+q1011a = 0;
+
+q1100a = r1100;
+
+q1101a = 0;
+
+q1110a = 0;
+
+q1111a = r1111;
+
+Substitute in a1,a2,a3 and gamma so that q0000b,q0001b,...,q1111b are expressed in terms of the same parameters as q0000,q0001,...,q1111.
+
+q0000b = q0000a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4]};
+
+q0001b = q0001a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4]};
+
+q0010b = q0010a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4]};
+
+q0011b = q0011a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4]};
+
+q0100b = q0100a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4]};
+
+q0101b = q0101a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4]};
+
+q0110b = q0110a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4]};
+
+q0111b = q0111a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4]};
+
+q1000b = q1000a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4]};
+
+q1001b = q1001a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4]};
+
+q1010b = q1010a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4]};
+
+q1011b = q1011a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4]};
+
+q1100b = q1100a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4]};
+
+q1101b = q1101a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4]};
+
+q1110b = q1110a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4]};
+
+q1111b = q1111a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4]};
+
+Check whether expressions are equal or not.
+
+Simplify[q0000b - q0000]
+
+0
+
+Simplify[q0001b - q0001]
+
+0
+
+Simplify[q0010b - q0010]
+
+0
+
+FullSimplify[q0011b - q0011]
+
+0
+
+FullSimplify[q0100b - q0100]
+
+0
+
+FullSimplify[q0101b - q0101]
+
+0
+
+FullSimplify[q0110b - q0110]
+
+0
+
+FullSimplify[q0111b - q0111]
+
+0
+
+FullSimplify[q1000b - q1000]
+
+0
+
+FullSimplify[q1001b - q1001]
+
+0
+
+FullSimplify[q1010b - q1010]
+
+0
+
+FullSimplify[q1011b - q1011]
+
+0
+
+FullSimplify[q1100b - q1100]
+
+0
+
+FullSimplify[q1101b - q1101]
+
+0
+
+FullSimplify[q1110b - q1110]
+
+0
+
+FullSimplify[q1111b - q1111]
+
+0
+
+Construct phylogenetic tensor for CDM N_{4,3} (a1=b1)
+
+Transition matrix for section of edge 1 below the root and not ancestral to outgroup o
+
+M1 = FullSimplify[
+   MatrixExp[(1 - t)*
+     a1*(KroneckerProduct[Id, 
+        KroneckerProduct[La, KroneckerProduct[La, La]]] + 
+       KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[La, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[Id, La]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, La]]] + 
+       KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[Id, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Id, La]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Lb, Lb]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Lb, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Id, Lb]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Lb]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Id, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Id]]] + 
+       KroneckerProduct[Id, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Lb]]])]];
+
+Transition matrix for edge corresponding to parameter 2
+
+M2 = FullSimplify[
+   MatrixExp[
+    a2*(KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, La]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, Id]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Id, La]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Lb]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Id]]] +
+        KroneckerProduct[Id, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Lb]]])]];
+
+Transition matrix for edge corresponding to parameter 3
+
+M3 = FullSimplify[
+   MatrixExp[
+    a3*(KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[Id, Id]]] +
+        KroneckerProduct[Id, 
+        KroneckerProduct[Lb, KroneckerProduct[Id, Id]]])]];
+
+Transition matrix for edge corresponding to parameter 4
+
+M4 = FullSimplify[
+   MatrixExp[
+    a4*(KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Id, La]]] +
+        KroneckerProduct[Id, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Lb]]])]];
+
+Transition matrix for edge corresponding to parameter 5
+
+M5 = FullSimplify[
+   MatrixExp[
+    a5*(KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, Id]]] +
+        KroneckerProduct[Id, 
+        KroneckerProduct[Id, KroneckerProduct[Lb, Id]]])]];
+
+Transition matrix for section of edge 1 below the root and ancestral to o
+
+M6 = FullSimplify[
+   MatrixExp[
+    t*a1*(KroneckerProduct[La, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Id]]] + 
+       KroneckerProduct[Lb, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Id]]])]];
+
+P = H.M6.M5.M4.M3.M2.M1.p0s;
+
+Elements of the transformed phylogenetic tensor
+
+q0000 = Simplify[P[[1]][[1]]];
+
+q0001 = Simplify[P[[2]][[1]]];
+
+q0010 = Simplify[P[[3]][[1]]];
+
+q0011 = Simplify[P[[4]][[1]]];
+
+q0100 = Simplify[P[[5]][[1]]];
+
+q0101 = Simplify[P[[6]][[1]]];
+
+q0110 = Simplify[P[[7]][[1]]];
+
+q0111 = Simplify[P[[8]][[1]]];
+
+q1000 = Simplify[P[[9]][[1]]];
+
+q1001 = Simplify[P[[10]][[1]]];
+
+q1010 = Simplify[P[[11]][[1]]];
+
+q1011 = Simplify[P[[12]][[1]]];
+
+q1100 = Simplify[P[[13]][[1]]];
+
+q1101 = Simplify[P[[14]][[1]]];
+
+q1110 = Simplify[P[[15]][[1]]];
+
+q1111 = Simplify[P[[16]][[1]]];
+
+r parameters and delta
+
+r0011 = x4*x5;
+
+r0101 = x2*x3*x4;
+
+r0110 = x2*x3*x5;
+
+r1001 = x1*x2*x4;
+
+r1010 = x1*x2*x5;
+
+r1100 = x1*x3;
+
+r1111 = x1*x3*x4*x5;
+
+Elements of the phylogenetic tensor, as expressed in the proof of Theorem 4 of the online appendices and supplementary material. We will show that the two forms of the phylogenetic tensor element expressions here are equal.
+
+q0000a = 1;
+
+q0001a = 0;
+
+q0010a = 0;
+
+q0011a = r0011;
+
+q0100a = 0;
+
+q0101a = r0101;
+
+q0110a = r0110;
+
+q0111a = 0;
+
+q1000a = 0;
+
+q1001a = r1001;
+
+q1010a = r1010;
+
+q1011a = 0;
+
+q1100a = r1100;
+
+q1101a = 0;
+
+q1110a = 0;
+
+q1111a = r1111;
+
+Substitute in a1,a2,a3 and gamma so that q0000b,q0001b,...,q1111b are expressed in terms of the same parameters as q0000,q0001,...,q1111.
+
+q0000b = q0000a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5]};
+
+q0001b = q0001a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5]};
+
+q0010b = q0010a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5]};
+
+q0011b = q0011a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5]};
+
+q0100b = q0100a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5]};
+
+q0101b = q0101a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5]};
+
+q0110b = q0110a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5]};
+
+q0111b = q0111a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5]};
+
+q1000b = q1000a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5]};
+
+q1001b = q1001a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5]};
+
+q1010b = q1010a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5]};
+
+q1011b = q1011a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5]};
+
+q1100b = q1100a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5]};
+
+q1101b = q1101a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5]};
+
+q1110b = q1110a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5]};
+
+q1111b = q1111a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5]};
+
+Check whether expressions are equal or not.
+
+Simplify[q0000b - q0000]
+
+0
+
+Simplify[q0001b - q0001]
+
+0
+
+Simplify[q0010b - q0010]
+
+0
+
+FullSimplify[q0011b - q0011]
+
+0
+
+FullSimplify[q0100b - q0100]
+
+0
+
+FullSimplify[q0101b - q0101]
+
+0
+
+FullSimplify[q0110b - q0110]
+
+0
+
+FullSimplify[q0111b - q0111]
+
+0
+
+FullSimplify[q1000b - q1000]
+
+0
+
+FullSimplify[q1001b - q1001]
+
+0
+
+FullSimplify[q1010b - q1010]
+
+0
+
+FullSimplify[q1011b - q1011]
+
+0
+
+FullSimplify[q1100b - q1100]
+
+0
+
+FullSimplify[q1101b - q1101]
+
+0
+
+FullSimplify[q1110b - q1110]
+
+0
+
+FullSimplify[q1111b - q1111]
+
+0
+
+Construct phylogenetic tensor for CDM N_{4,4} (a1=b1)
+
+Transition matrix for section of edge 1 below the root and not ancestral to outgroup o
+
+M1 = FullSimplify[
+   MatrixExp[(1 - t)*
+     a1*(KroneckerProduct[Id, 
+        KroneckerProduct[La, KroneckerProduct[La, La]]] + 
+       KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[La, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[Id, La]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, La]]] + 
+       KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[Id, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Id, La]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Lb, Lb]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Lb, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Id, Lb]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Lb]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Id, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Id]]] + 
+       KroneckerProduct[Id, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Lb]]])]];
+
+Transition matrix for edge corresponding to parameter 2
+
+M2 = FullSimplify[
+   MatrixExp[
+    a2*(KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, La]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, Id]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Id, La]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Lb]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Id]]] +
+        KroneckerProduct[Id, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Lb]]])]];
+
+Transition matrix for edge corresponding to parameter 3
+
+M3 = FullSimplify[
+   MatrixExp[
+    a3*(KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[Id, Id]]] +
+        KroneckerProduct[Id, 
+        KroneckerProduct[Lb, KroneckerProduct[Id, Id]]])]];
+
+Transition matrix for edge corresponding to parameter 4
+
+M4 = FullSimplify[
+   MatrixExp[
+    a4*(KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Id, La]]] +
+        KroneckerProduct[Id, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Lb]]])]];
+
+Transition matrix for edge corresponding to parameter 5
+
+M5 = FullSimplify[
+   MatrixExp[
+    a5*(KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, Id]]] +
+        KroneckerProduct[Id, 
+        KroneckerProduct[Id, KroneckerProduct[Lb, Id]]])]];
+
+Transition matrix for edge corresponding to parameter 6
+
+M6 = FullSimplify[
+   MatrixExp[
+    a6*(KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, La]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, Id]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Id, La]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Lb]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Id]]] +
+        KroneckerProduct[Id, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Lb]]])]];
+
+Transition matrix for section of edge 1 below the root and ancestral to o
+
+M7 = FullSimplify[
+   MatrixExp[
+    t*a1*(KroneckerProduct[La, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Id]]] + 
+       KroneckerProduct[Lb, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Id]]])]];
+
+P = H.M7.M6.M5.M4.M3.M2.M1.p0s;
+
+Elements of the transformed phylogenetic tensor
+
+q0000 = Simplify[P[[1]][[1]]];
+
+q0001 = Simplify[P[[2]][[1]]];
+
+q0010 = Simplify[P[[3]][[1]]];
+
+q0011 = Simplify[P[[4]][[1]]];
+
+q0100 = Simplify[P[[5]][[1]]];
+
+q0101 = Simplify[P[[6]][[1]]];
+
+q0110 = Simplify[P[[7]][[1]]];
+
+q0111 = Simplify[P[[8]][[1]]];
+
+q1000 = Simplify[P[[9]][[1]]];
+
+q1001 = Simplify[P[[10]][[1]]];
+
+q1010 = Simplify[P[[11]][[1]]];
+
+q1011 = Simplify[P[[12]][[1]]];
+
+q1100 = Simplify[P[[13]][[1]]];
+
+q1101 = Simplify[P[[14]][[1]]];
+
+q1110 = Simplify[P[[15]][[1]]];
+
+q1111 = Simplify[P[[16]][[1]]];
+
+r parameters and delta
+
+r0011 = 1 - x6*(1 - x4*x5);
+
+r0101 = x2*x3*x4*x6;
+
+r0110 = x2*x3*x5*x6;
+
+r1001 = x1*x2*x4*x6;
+
+r1010 = x1*x2*x5*x6;
+
+r1100 = x1*x3;
+
+r1111 = x1*x3*(1 - x6*(1 - x4*x5));
+
+Elements of the phylogenetic tensor, as expressed in the proof of Theorem 4 of the online appendices and supplementary material. We will show that the two forms of the phylogenetic tensor element expressions here are equal.
+
+q0000a = 1;
+
+q0001a = 0;
+
+q0010a = 0;
+
+q0011a = r0011;
+
+q0100a = 0;
+
+q0101a = r0101;
+
+q0110a = r0110;
+
+q0111a = 0;
+
+q1000a = 0;
+
+q1001a = r1001;
+
+q1010a = r1010;
+
+q1011a = 0;
+
+q1100a = r1100;
+
+q1101a = 0;
+
+q1110a = 0;
+
+q1111a = r1111;
+
+Substitute in a1,a2,a3 and gamma so that q0000b,q0001b,...,q1111b are expressed in terms of the same parameters as q0000,q0001,...,q1111.
+
+q0000b = q0000a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6]};
+
+q0001b = q0001a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6]};
+
+q0010b = q0010a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6]};
+
+q0011b = q0011a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6]};
+
+q0100b = q0100a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6]};
+
+q0101b = q0101a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6]};
+
+q0110b = q0110a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6]};
+
+q0111b = q0111a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6]};
+
+q1000b = q1000a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6]};
+
+q1001b = q1001a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6]};
+
+q1010b = q1010a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6]};
+
+q1011b = q1011a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6]};
+
+q1100b = q1100a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6]};
+
+q1101b = q1101a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6]};
+
+q1110b = q1110a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6]};
+
+q1111b = q1111a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6]};
+
+Check whether expressions are equal or not.
+
+Simplify[q0000b - q0000]
+
+0
+
+Simplify[q0001b - q0001]
+
+0
+
+Simplify[q0010b - q0010]
+
+0
+
+FullSimplify[q0011b - q0011]
+
+0
+
+FullSimplify[q0100b - q0100]
+
+0
+
+FullSimplify[q0101b - q0101]
+
+0
+
+FullSimplify[q0110b - q0110]
+
+0
+
+FullSimplify[q0111b - q0111]
+
+0
+
+FullSimplify[q1000b - q1000]
+
+0
+
+FullSimplify[q1001b - q1001]
+
+0
+
+FullSimplify[q1010b - q1010]
+
+0
+
+FullSimplify[q1011b - q1011]
+
+0
+
+FullSimplify[q1100b - q1100]
+
+0
+
+FullSimplify[q1101b - q1101]
+
+0
+
+FullSimplify[q1110b - q1110]
+
+0
+
+FullSimplify[q1111b - q1111]
+
+0
+
+Construct phylogenetic tensor for CDM N_{4,5} (a1=b1)
+
+Transition matrix for section of edge 1 below the root and not ancestral to outgroup o
+
+M1 = FullSimplify[
+   MatrixExp[(1 - t)*
+     a1*(KroneckerProduct[Id, 
+        KroneckerProduct[La, KroneckerProduct[La, La]]] + 
+       KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[La, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[Id, La]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, La]]] + 
+       KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[Id, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Id, La]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Lb, Lb]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Lb, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Id, Lb]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Lb]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Id, Id]]] + 
+       KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Id]]] + 
+       KroneckerProduct[Id, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Lb]]])]];
+
+Transition matrix for edge corresponding to parameter 2
+
+M2 = FullSimplify[
+   MatrixExp[
+    a2*(KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, La]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, Id]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Id, La]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Lb]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Lb, Id]]] +
+        KroneckerProduct[Id, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Lb]]])]];
+
+Transition matrix for edge corresponding to parameter 3
+
+M3 = FullSimplify[
+   MatrixExp[
+    a3*(KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[Id, Id]]] +
+        KroneckerProduct[Id, 
+        KroneckerProduct[Lb, KroneckerProduct[Id, Id]]])]];
+
+Transition matrix for edge corresponding to parameter 4
+
+M4 = FullSimplify[
+   MatrixExp[
+    a4*(KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[Id, La]]] +
+        KroneckerProduct[Id, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Lb]]])]];
+
+Transition matrix for edge corresponding to parameter 5
+
+M5 = FullSimplify[
+   MatrixExp[
+    a5*(KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, Id]]] +
+        KroneckerProduct[Id, 
+        KroneckerProduct[Id, KroneckerProduct[Lb, Id]]])]];
+
+Transition matrix for edge corresponding to parameter 6
+
+M6 = FullSimplify[
+   MatrixExp[
+    a6*(KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[La, Id]]] +
+        KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[Id, Id]]] +
+        KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, Id]]] +
+        KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Lb, Id]]] +
+        KroneckerProduct[Id, KroneckerProduct[Lb, KroneckerProduct[Id, Id]]] +
+        KroneckerProduct[Id, 
+        KroneckerProduct[Id, KroneckerProduct[Lb, Id]]])]];
+
+Transition matrix for edge corresponding to parameter 7
+
+M7 = FullSimplify[
+   MatrixExp[
+    a7*(KroneckerProduct[Id, KroneckerProduct[Id, KroneckerProduct[La, Id]]] +
+        KroneckerProduct[Id, 
+        KroneckerProduct[Id, KroneckerProduct[Lb, Id]]])]];
+
+Transition matrix for edge corresponding to parameter 8
+
+M8 = FullSimplify[
+   MatrixExp[
+    a8*(KroneckerProduct[Id, KroneckerProduct[La, KroneckerProduct[Id, Id]]] +
+        KroneckerProduct[Id, 
+        KroneckerProduct[Lb, KroneckerProduct[Id, Id]]])]];
+
+Transition matrix for section of edge 1 below the root and ancestral to o
+
+M9 = FullSimplify[
+   MatrixExp[
+    t*a1*(KroneckerProduct[La, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Id]]] + 
+       KroneckerProduct[Lb, 
+        KroneckerProduct[Id, KroneckerProduct[Id, Id]]])]];
+
+P = H.M9.M8.M7.M6.M5.M4.M3.M2.M1.p0s;
+
+Elements of the transformed phylogenetic tensor
+
+q0000 = Simplify[P[[1]][[1]]];
+
+q0001 = Simplify[P[[2]][[1]]];
+
+q0010 = Simplify[P[[3]][[1]]];
+
+q0011 = Simplify[P[[4]][[1]]];
+
+q0100 = Simplify[P[[5]][[1]]];
+
+q0101 = Simplify[P[[6]][[1]]];
+
+q0110 = Simplify[P[[7]][[1]]];
+
+q0111 = Simplify[P[[8]][[1]]];
+
+q1000 = Simplify[P[[9]][[1]]];
+
+q1001 = Simplify[P[[10]][[1]]];
+
+q1010 = Simplify[P[[11]][[1]]];
+
+q1011 = Simplify[P[[12]][[1]]];
+
+q1100 = Simplify[P[[13]][[1]]];
+
+q1101 = Simplify[P[[14]][[1]]];
+
+q1110 = Simplify[P[[15]][[1]]];
+
+q1111 = Simplify[P[[16]][[1]]];
+
+r parameters and delta
+
+r0011 = x4*x5*x6*x7;
+
+r0101 = x2*x3*x4*x6*x8;
+
+r0110 = x7*x8*(1 - x6*(1 - x2*x3*x5));
+
+r1001 = x1*x2*x4;
+
+r1010 = x1*x2*x5*x6*x7;
+
+r1100 = x1*x3*x6*x8;
+
+r1111 = x1*x4*x7*x8*(x2*(1 - x6) + x3*x5*x6);
+
+Elements of the phylogenetic tensor, as expressed in the proof of Theorem 4 of the online appendices and supplementary material. We will show that the two forms of the phylogenetic tensor element expressions here are equal.
+
+q0000a = 1;
+
+q0001a = 0;
+
+q0010a = 0;
+
+q0011a = r0011;
+
+q0100a = 0;
+
+q0101a = r0101;
+
+q0110a = r0110;
+
+q0111a = 0;
+
+q1000a = 0;
+
+q1001a = r1001;
+
+q1010a = r1010;
+
+q1011a = 0;
+
+q1100a = r1100;
+
+q1101a = 0;
+
+q1110a = 0;
+
+q1111a = r1111;
+
+Substitute in a1,a2,a3 and gamma so that q0000b,q0001b,...,q1111b are expressed in terms of the same parameters as q0000,q0001,...,q1111.
+
+q0000b = q0000a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6], x7 -> Exp[-2*a7], 
+    x8 -> Exp[-2*a8]};
+
+q0001b = q0001a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6], x7 -> Exp[-2*a7], 
+    x8 -> Exp[-2*a8]};
+
+q0010b = q0010a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6], x7 -> Exp[-2*a7], 
+    x8 -> Exp[-2*a8]};
+
+q0011b = q0011a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6], x7 -> Exp[-2*a7], 
+    x8 -> Exp[-2*a8]};
+
+q0100b = q0100a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6], x7 -> Exp[-2*a7], 
+    x8 -> Exp[-2*a8]};
+
+q0101b = q0101a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6], x7 -> Exp[-2*a7], 
+    x8 -> Exp[-2*a8]};
+
+q0110b = q0110a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6], x7 -> Exp[-2*a7], 
+    x8 -> Exp[-2*a8]};
+
+q0111b = q0111a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6], x7 -> Exp[-2*a7], 
+    x8 -> Exp[-2*a8]};
+
+q1000b = q1000a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6], x7 -> Exp[-2*a7], 
+    x8 -> Exp[-2*a8]};
+
+q1001b = q1001a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6], x7 -> Exp[-2*a7], 
+    x8 -> Exp[-2*a8]};
+
+q1010b = q1010a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6], x7 -> Exp[-2*a7], 
+    x8 -> Exp[-2*a8]};
+
+q1011b = q1011a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6], x7 -> Exp[-2*a7], 
+    x8 -> Exp[-2*a8]};
+
+q1100b = q1100a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6], x7 -> Exp[-2*a7], 
+    x8 -> Exp[-2*a8]};
+
+q1101b = q1101a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6], x7 -> Exp[-2*a7], 
+    x8 -> Exp[-2*a8]};
+
+q1110b = q1110a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6], x7 -> Exp[-2*a7], 
+    x8 -> Exp[-2*a8]};
+
+q1111b = q1111a /. {x1 -> Exp[-2*a1], x2 -> Exp[-2*a2], x3 -> Exp[-2*a3], 
+    x4 -> Exp[-2*a4], x5 -> Exp[-2*a5], x6 -> Exp[-2*a6], x7 -> Exp[-2*a7], 
+    x8 -> Exp[-2*a8]};
+
+Check whether expressions are equal or not.
+
+Simplify[q0000b - q0000]
+
+0
+
+Simplify[q0001b - q0001]
+
+0
+
+Simplify[q0010b - q0010]
+
+0
+
+FullSimplify[q0011b - q0011]
+
+0
+
+FullSimplify[q0100b - q0100]
+
+0
+
+FullSimplify[q0101b - q0101]
+
+0
+
+FullSimplify[q0110b - q0110]
+
+0
+
+FullSimplify[q0111b - q0111]
+
+0
+
+FullSimplify[q1000b - q1000]
+
+0
+
+FullSimplify[q1001b - q1001]
+
+0
+
+FullSimplify[q1010b - q1010]
+
+0
+
+FullSimplify[q1011b - q1011]
+
+0
+
+FullSimplify[q1100b - q1100]
+
+0
+
+FullSimplify[q1101b - q1101]
+
+0
+
+FullSimplify[q1110b - q1110]
+
+0
+
+FullSimplify[q1111b - q1111]
+
+0

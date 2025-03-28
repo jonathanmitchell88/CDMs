@@ -1,0 +1,730 @@
+Text output of S8.nb
+
+####################
+# Article: Convergence-divergence models: Generalizations of phylogenetic trees modeling gene flow over time
+# Journal: For peer review in the Bulletin of Mathematical Biology
+# Authors: Jonathan D. Mitchell (1,2*) and Barbara R. Holland (1,2)
+# Affiliations: 1) School of Natural Sciences (Mathematics), University of Tasmania, Hobart, TAS, Australia, 2) ARC Centre of Excellence for Plant Success in Nature and Agriculture, University of Tasmania, Hobart, TAS, Australia.
+# Corresponding author e-mail: jonathanmitchell88@gmail.com
+####################
+
+CDM 5, parameters {x1,x2,...,x11}
+
+f0011 = x4*x5*x6*x7*x9*x10;
+
+f0101 = x10*x11*(1 - x9*(1 - x2*x3*x4*x6*x8));
+
+f0110 = x7*x8*x9*x11*(1 - x6*(1 - x2*x3*x5));
+
+f0111 = x2*x3*x4*x5*x6*x7*x8*x9*x10*x11;
+
+f1001 = x1*x2*x4*x9*x10;
+
+f1010 = x1*x2*x5*x6*x7;
+
+f1011 = x1*x2*x4*x5*x6*x7*x9*x10;
+
+f1100 = x1*x3*x6*x8*x9*x11;
+
+f1101 = x1*x2*x3*x4*x6*x8*x9*x10*x11;
+
+f1110 = x1*x2*x3*x5*x6*x7*x8*x9*x11;
+
+f1111 = x1*x7*x10*x11*(x4*x8*x9*(x2*(1 - x6) + x3*x5*x6) + x2*x5*x6*(1 - x9));
+
+fd = x1*x2*x3*x4*x5*x6*x7*x8*x9*x10*x11;
+
+CDM 5, parameters {y1,y2,...,y9}
+
+f0011a = y4*y5*y6*y8;
+
+f0101a = y9*(1 - y8) + y2*y3*y4*y6*y8;
+
+f0110a = y8*(y7*(1 - y6) + y2*y3*y5*y6);
+
+f0111a = y2*y3*y4*y5*y6*y8;
+
+f1001a = y1*y2*y4*y8;
+
+f1010a = y1*y2*y5*y6;
+
+f1011a = y1*y2*y4*y5*y6*y8;
+
+f1100a = y1*y3*y6*y8;
+
+f1101a = y1*y2*y3*y4*y6*y8;
+
+f1110a = y1*y2*y3*y5*y6*y8;
+
+f1111a = y1*(y4*y8*(y2*y7*(1 - y6) + y3*y5*y6) + y2*y5*y6*y9*(1 - y8));
+
+fda = y1*y2*y3*y4*y5*y6*y8;
+
+Convert functions of {y1,y2,...,y9} into functions of {x1,x2,...,x11}
+
+f0011b = FullSimplify[
+   f0011a /. {y1 -> x1, y2 -> x2, y3 -> x3*x8*x11, y4 -> x4*x10, y5 -> x5*x7, 
+     y6 -> x6, y7 -> x7*x8*x11, y8 -> x9, y9 -> x10*x11}];
+
+f0101b = FullSimplify[
+   f0101a /. {y1 -> x1, y2 -> x2, y3 -> x3*x8*x11, y4 -> x4*x10, y5 -> x5*x7, 
+     y6 -> x6, y7 -> x7*x8*x11, y8 -> x9, y9 -> x10*x11}];
+
+f0110b = FullSimplify[
+   f0110a /. {y1 -> x1, y2 -> x2, y3 -> x3*x8*x11, y4 -> x4*x10, y5 -> x5*x7, 
+     y6 -> x6, y7 -> x7*x8*x11, y8 -> x9, y9 -> x10*x11}];
+
+f0111b = FullSimplify[
+   f0111a /. {y1 -> x1, y2 -> x2, y3 -> x3*x8*x11, y4 -> x4*x10, y5 -> x5*x7, 
+     y6 -> x6, y7 -> x7*x8*x11, y8 -> x9, y9 -> x10*x11}];
+
+f1001b = FullSimplify[
+   f1001a /. {y1 -> x1, y2 -> x2, y3 -> x3*x8*x11, y4 -> x4*x10, y5 -> x5*x7, 
+     y6 -> x6, y7 -> x7*x8*x11, y8 -> x9, y9 -> x10*x11}];
+
+f1010b = FullSimplify[
+   f1010a /. {y1 -> x1, y2 -> x2, y3 -> x3*x8*x11, y4 -> x4*x10, y5 -> x5*x7, 
+     y6 -> x6, y7 -> x7*x8*x11, y8 -> x9, y9 -> x10*x11}];
+
+f1011b = FullSimplify[
+   f1011a /. {y1 -> x1, y2 -> x2, y3 -> x3*x8*x11, y4 -> x4*x10, y5 -> x5*x7, 
+     y6 -> x6, y7 -> x7*x8*x11, y8 -> x9, y9 -> x10*x11}];
+
+f1100b = FullSimplify[
+   f1100a /. {y1 -> x1, y2 -> x2, y3 -> x3*x8*x11, y4 -> x4*x10, y5 -> x5*x7, 
+     y6 -> x6, y7 -> x7*x8*x11, y8 -> x9, y9 -> x10*x11}];
+
+f1101b = FullSimplify[
+   f1101a /. {y1 -> x1, y2 -> x2, y3 -> x3*x8*x11, y4 -> x4*x10, y5 -> x5*x7, 
+     y6 -> x6, y7 -> x7*x8*x11, y8 -> x9, y9 -> x10*x11}];
+
+f1110b = FullSimplify[
+   f1110a /. {y1 -> x1, y2 -> x2, y3 -> x3*x8*x11, y4 -> x4*x10, y5 -> x5*x7, 
+     y6 -> x6, y7 -> x7*x8*x11, y8 -> x9, y9 -> x10*x11}];
+
+f1111b = FullSimplify[
+   f1111a /. {y1 -> x1, y2 -> x2, y3 -> x3*x8*x11, y4 -> x4*x10, y5 -> x5*x7, 
+     y6 -> x6, y7 -> x7*x8*x11, y8 -> x9, y9 -> x10*x11}];
+
+fdb = FullSimplify[
+   fda /. {y1 -> x1, y2 -> x2, y3 -> x3*x8*x11, y4 -> x4*x10, y5 -> x5*x7, 
+     y6 -> x6, y7 -> x7*x8*x11, y8 -> x9, y9 -> x10*x11}];
+
+Check that two sets of expressions are identical
+
+FullSimplify[f0011b - f0011]
+
+0
+
+FullSimplify[f0101b - f0101]
+
+0
+
+FullSimplify[f0110b - f0110]
+
+0
+
+FullSimplify[f0111b - f0111]
+
+0
+
+FullSimplify[f1001b - f1001]
+
+0
+
+FullSimplify[f1010b - f1010]
+
+0
+
+FullSimplify[f1011b - f1011]
+
+0
+
+FullSimplify[f1100b - f1100]
+
+0
+
+FullSimplify[f1101b - f1101]
+
+0
+
+FullSimplify[f1110b - f1110]
+
+0
+
+FullSimplify[f1111b - f1111]
+
+0
+
+FullSimplify[fdb - fd]
+
+0
+
+CDM 5
+
+(o,(a,(b,c))) and (o,(a,(c,b)))
+
+FullSimplify[f0011*f1001*f1010 - f1011^2]
+
+0
+
+(o,(b,(a,c))) and (o,(b,(c,a)))
+
+Constraint >0 since xi in (0,1) for all i
+
+FullSimplify[f0101*f1001*f1100 - f1101^2]
+
+x1^2 x10^2 x11^2 x2 x3 x4 x6 x8 (-1 + x2 x3 x4 x6 x8) (-1 + x9) x9^2
+
+(o,(c,(a,b))) and (o,(c,(b,a)))
+
+Constraint >0 since xi in (0,1) for all i
+
+FullSimplify[f0110*f1100*f1010 - f1110^2]
+
+x1^2 x11^2 x2 x3 x5 (-1 + x2 x3 x5) (-1 + x6) x6^2 x7^2 x8^2 x9^2
+
+Simplify the first generator of the elimination ideal for CDM 5 in CDMsThm1Output.txt.
+
+gen1cdm5 = 
+  z1*z2^2*z3*z4^2*z6^2*z7*z8^3 - z1*z2^2*z3*z4^2*z6^2*z7*z8^2 - 
+   z1*z2^2*z3*z4^2*z6*z7*z8^3 - z1*z2^2*z3*z4*z5*z6^2*z8^2*z9 + 
+   z1*z2^2*z3*z4^2*z6*z7*z8^2 + z1*z2^2*z3*z4*z5*z6^2*z8*z9 + 
+   z1*z2^2*z3*z4*z5*z6*z8^2*z9 - z1*z2^2*z3*z4*z5*z6*z8*z9;
+
+gen1cdm5a = z1*z2^2*z3*z4*z6*z8*(1 - z6)*(1 - z8)*(z4*z7*z8 - z5*z9);
+
+FullSimplify[gen1cdm5 - gen1cdm5a]
+
+0
+
+ CDM 4
+
+(o,(a,(b,c))) and (o,(a,(c,b)))
+
+FullSimplify[f0011*f1001*f1010 - f1011^2 /. {x10 -> 1, x11 -> 1}]
+
+0
+
+(o,(b,(a,c))) and (o,(b,(c,a)))
+
+Constraint >0 since xi in (0,1) for all i
+
+FullSimplify[f0101*f1001*f1100 - f1101^2 /. {x10 -> 1, x11 -> 1}]
+
+x1^2 x2 x3 x4 x6 x8 (-1 + x2 x3 x4 x6 x8) (-1 + x9) x9^2
+
+(o,(c,(a,b))) and (o,(c,(b,a)))
+
+Constraint >0 since xi in (0,1) for all i
+
+FullSimplify[f0110*f1100*f1010 - f1110^2 /. {x10 -> 1, x11 -> 1}]
+
+x1^2 x2 x3 x5 (-1 + x2 x3 x5) (-1 + x6) x6^2 x7^2 x8^2 x9^2
+
+Simplify the first generator of the elimination ideal for CDM 4 in CDMsThm1Output.txt.
+
+gen1cdm4 = 
+  z1*z2*z3*z4*z5*z6^2*z7*z8^2 - z1*z2*z3*z4*z5*z6*z7*z8^2 - 
+   z1*z2*z3*z4*z5*z6^2*z8 + z1*z2*z3*z4*z5*z6*z8;
+
+gen1cdm4a = z1*z2*z3*z4*z5*z6*z8*(1 - z6)*(1 - z7*z8);
+
+FullSimplify[gen1cdm4 - gen1cdm4a]
+
+0
+
+CDM 3
+
+For all leaf labelings, C1=f0011*f1100, C2=f0101*f1010 and C3=f0110*f1001. For example, on the principal tree (o,(c,(b,a))), C1=f0011*f1100 is equivalent to C3=f0110*f1001 on the principal tree (o,(a,(b,c))).
+
+(o,(a,(b,c)))
+
+C1 = FullSimplify[f0011*f1100 /. {x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x3 x4 x5 x6^2 x7 x8
+
+C2 = FullSimplify[f0101*f1010 /. {x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2^2 x3 x4 x5 x6^2 x7 x8
+
+C3 = FullSimplify[f0110*f1001 /. {x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2 x4 (1 + (-1 + x2 x3 x5) x6) x7 x8
+
+C1>C2 since xi in (0,1) for all i
+
+FullSimplify[C1 - C2]
+
+-x1 (-1 + x2^2) x3 x4 x5 x6^2 x7 x8
+
+C3>C2 since xi in (0,1) for all i
+
+FullSimplify[C3 - C2]
+
+-x1 x2 x4 (-1 + x6) (1 + x2 x3 x5 x6) x7 x8
+
+(o,(c,(b,a)))
+
+C1 = FullSimplify[f0110*f1001 /. {x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2 x4 (1 + (-1 + x2 x3 x5) x6) x7 x8
+
+C2 = FullSimplify[f0101*f1010 /. {x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2^2 x3 x4 x5 x6^2 x7 x8
+
+C3 = FullSimplify[f0011*f1100 /. {x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x3 x4 x5 x6^2 x7 x8
+
+C1>C2 since xi in (0,1) for all i
+
+FullSimplify[C1 - C2]
+
+-x1 x2 x4 (-1 + x6) (1 + x2 x3 x5 x6) x7 x8
+
+C3>C2 since xi in (0,1) for all i
+
+FullSimplify[C3 - C2]
+
+-x1 (-1 + x2^2) x3 x4 x5 x6^2 x7 x8
+
+(o,(a,(c,b)))
+
+C1 = FullSimplify[f0011*f1100 /. {x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x3 x4 x5 x6^2 x7 x8
+
+C2 = FullSimplify[f0110*f1001 /. {x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2 x4 (1 + (-1 + x2 x3 x5) x6) x7 x8
+
+C3 = FullSimplify[f0101*f1010 /. {x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2^2 x3 x4 x5 x6^2 x7 x8
+
+C1>C3 since xi in (0,1) for all i
+
+FullSimplify[C1 - C3]
+
+-x1 (-1 + x2^2) x3 x4 x5 x6^2 x7 x8
+
+C2>C3 since xi in (0,1) for all i
+
+FullSimplify[C2 - C3]
+
+-x1 x2 x4 (-1 + x6) (1 + x2 x3 x5 x6) x7 x8
+
+(o,(b,(c,a)))
+
+C1 = FullSimplify[f0110*f1001 /. {x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2 x4 (1 + (-1 + x2 x3 x5) x6) x7 x8
+
+C2 = FullSimplify[f0011*f1100 /. {x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x3 x4 x5 x6^2 x7 x8
+
+C3 = FullSimplify[f0101*f1010 /. {x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2^2 x3 x4 x5 x6^2 x7 x8
+
+C1>C3 since xi in (0,1) for all i
+
+FullSimplify[C1 - C3]
+
+-x1 x2 x4 (-1 + x6) (1 + x2 x3 x5 x6) x7 x8
+
+C2>C3 since xi in (0,1) for all i
+
+FullSimplify[C2 - C3]
+
+-x1 (-1 + x2^2) x3 x4 x5 x6^2 x7 x8
+
+(o,(b,(a,c)))
+
+C1 = FullSimplify[f0101*f1010 /. {x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2^2 x3 x4 x5 x6^2 x7 x8
+
+C2 = FullSimplify[f0011*f1100 /. {x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x3 x4 x5 x6^2 x7 x8
+
+C3 = FullSimplify[f0110*f1001 /. {x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2 x4 (1 + (-1 + x2 x3 x5) x6) x7 x8
+
+C2>C1 since xi in (0,1) for all i
+
+FullSimplify[C2 - C1]
+
+-x1 (-1 + x2^2) x3 x4 x5 x6^2 x7 x8
+
+C3>C1 since xi in (0,1) for all i
+
+FullSimplify[C3 - C1]
+
+-x1 x2 x4 (-1 + x6) (1 + x2 x3 x5 x6) x7 x8
+
+(o,(c,(a,b)))
+
+C1 = FullSimplify[f0101*f1010 /. {x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2^2 x3 x4 x5 x6^2 x7 x8
+
+C2 = FullSimplify[f0110*f1001 /. {x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2 x4 (1 + (-1 + x2 x3 x5) x6) x7 x8
+
+C3 = FullSimplify[f0011*f1100 /. {x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x3 x4 x5 x6^2 x7 x8
+
+C2>C1 since xi in (0,1) for all i
+
+FullSimplify[C2 - C1]
+
+-x1 x2 x4 (-1 + x6) (1 + x2 x3 x5 x6) x7 x8
+
+C3>C1 since xi in (0,1) for all i
+
+FullSimplify[C3 - C1]
+
+-x1 (-1 + x2^2) x3 x4 x5 x6^2 x7 x8
+
+(o,(a,(b,c))) and (o,(a,(c,b)))
+
+FullSimplify[f0011*f1001*f1010 - f1011^2 /. {x9 -> 1, x10 -> 1, x11 -> 1}]
+
+0
+
+(o,(b,(a,c))) and (o,(b,(c,a)))
+
+Constraint >0 since xi in (0,1) for all i
+
+FullSimplify[f0101*f1001*f1100 - f1101^2 /. {x9 -> 1, x10 -> 1, x11 -> 1}]
+
+0
+
+(o,(c,(a,b))) and (o,(c,(b,a)))
+
+Constraint >0 since xi in (0,1) for all i
+
+FullSimplify[f0110*f1100*f1010 - f1110^2 /. {x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1^2 x2 x3 x5 (-1 + x2 x3 x5) (-1 + x6) x6^2 x7^2 x8^2
+
+CDM 2
+
+For all leaf labelings, C1=f0011*f1100, C2=f0101*f1010 and C3=f0110*f1001. For example, on the principal tree (o,(c,(b,a))), C1=f0011*f1100 is equivalent to C3=f0110*f1001 on the principal tree (o,(a,(b,c))).
+
+(o,(a,(b,c)))
+
+C1 = FullSimplify[
+  f0011*f1100 /. {x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x3 x4 x5 x6^2
+
+C2 = FullSimplify[
+  f0101*f1010 /. {x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2^2 x3 x4 x5 x6^2
+
+C3 = FullSimplify[
+  f0110*f1001 /. {x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2 x4 (1 + (-1 + x2 x3 x5) x6)
+
+C1>C2 since xi in (0,1) for all i
+
+FullSimplify[C1 - C2]
+
+-x1 (-1 + x2^2) x3 x4 x5 x6^2
+
+C3>C2 since xi in (0,1) for all i
+
+FullSimplify[C3 - C2]
+
+-x1 x2 x4 (-1 + x6) (1 + x2 x3 x5 x6)
+
+(o,(c,(b,a)))
+
+C1 = FullSimplify[
+  f0110*f1001 /. {x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2 x4 (1 + (-1 + x2 x3 x5) x6)
+
+C2 = FullSimplify[
+  f0101*f1010 /. {x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2^2 x3 x4 x5 x6^2
+
+C3 = FullSimplify[
+  f0011*f1100 /. {x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x3 x4 x5 x6^2
+
+C1>C2 since xi in (0,1) for all i
+
+FullSimplify[C1 - C2]
+
+-x1 x2 x4 (-1 + x6) (1 + x2 x3 x5 x6)
+
+C3>C2 since xi in (0,1) for all i
+
+FullSimplify[C3 - C2]
+
+-x1 (-1 + x2^2) x3 x4 x5 x6^2
+
+(o,(a,(c,b)))
+
+C1 = FullSimplify[
+  f0011*f1100 /. {x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x3 x4 x5 x6^2
+
+C2 = FullSimplify[
+  f0110*f1001 /. {x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2 x4 (1 + (-1 + x2 x3 x5) x6)
+
+C3 = FullSimplify[
+  f0101*f1010 /. {x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2^2 x3 x4 x5 x6^2
+
+C1>C3 since xi in (0,1) for all i
+
+FullSimplify[C1 - C3]
+
+-x1 (-1 + x2^2) x3 x4 x5 x6^2
+
+C2>C3 since xi in (0,1) for all i
+
+FullSimplify[C2 - C3]
+
+-x1 x2 x4 (-1 + x6) (1 + x2 x3 x5 x6)
+
+(o,(b,(c,a)))
+
+C1 = FullSimplify[
+  f0110*f1001 /. {x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2 x4 (1 + (-1 + x2 x3 x5) x6)
+
+C2 = FullSimplify[
+  f0011*f1100 /. {x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x3 x4 x5 x6^2
+
+C3 = FullSimplify[
+  f0101*f1010 /. {x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2^2 x3 x4 x5 x6^2
+
+C1>C3 since xi in (0,1) for all i
+
+FullSimplify[C1 - C3]
+
+-x1 x2 x4 (-1 + x6) (1 + x2 x3 x5 x6)
+
+C2>C3 since xi in (0,1) for all i
+
+FullSimplify[C2 - C3]
+
+-x1 (-1 + x2^2) x3 x4 x5 x6^2
+
+(o,(b,(a,c)))
+
+C1 = FullSimplify[
+  f0101*f1010 /. {x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2^2 x3 x4 x5 x6^2
+
+C2 = FullSimplify[
+  f0011*f1100 /. {x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x3 x4 x5 x6^2
+
+C3 = FullSimplify[
+  f0110*f1001 /. {x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2 x4 (1 + (-1 + x2 x3 x5) x6)
+
+C2>C1 since xi in (0,1) for all i
+
+FullSimplify[C2 - C1]
+
+-x1 (-1 + x2^2) x3 x4 x5 x6^2
+
+C3>C1 since xi in (0,1) for all i
+
+FullSimplify[C3 - C1]
+
+-x1 x2 x4 (-1 + x6) (1 + x2 x3 x5 x6)
+
+(o,(c,(a,b)))
+
+C1 = FullSimplify[
+  f0101*f1010 /. {x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2^2 x3 x4 x5 x6^2
+
+C2 = FullSimplify[
+  f0110*f1001 /. {x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2 x4 (1 + (-1 + x2 x3 x5) x6)
+
+C3 = FullSimplify[
+  f0011*f1100 /. {x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x3 x4 x5 x6^2
+
+C2>C1 since xi in (0,1) for all i
+
+FullSimplify[C2 - C1]
+
+-x1 x2 x4 (-1 + x6) (1 + x2 x3 x5 x6)
+
+C3>C1 since xi in (0,1) for all i
+
+FullSimplify[C3 - C1]
+
+-x1 (-1 + x2^2) x3 x4 x5 x6^2
+
+(o,(a,(b,c))) and (o,(a,(c,b)))
+
+FullSimplify[
+ f0011*f1001*f1010 - f1011^2 /. {x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, 
+   x11 -> 1}]
+
+0
+
+(o,(b,(a,c))) and (o,(b,(c,a)))
+
+Constraint >0 since xi in (0,1) for all i
+
+FullSimplify[
+ f0101*f1001*f1100 - f1101^2 /. {x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, 
+   x11 -> 1}]
+
+0
+
+(o,(c,(a,b))) and (o,(c,(b,a)))
+
+Constraint >0 since xi in (0,1) for all i
+
+FullSimplify[
+ f0110*f1100*f1010 - f1110^2 /. {x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, 
+   x11 -> 1}]
+
+x1^2 x2 x3 x5 (-1 + x2 x3 x5) (-1 + x6) x6^2
+
+CDM 1
+
+(o,(a,(b,c)))
+
+C1 = FullSimplify[
+  f0101*f1010 /. {x6 -> 1, x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2^2 x3 x4 x5
+
+C2 = FullSimplify[
+  f0110*f1001 /. {x6 -> 1, x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2^2 x3 x4 x5
+
+C3 = FullSimplify[
+  f0011*f1100 /. {x6 -> 1, x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x3 x4 x5
+
+C1=C2
+
+FullSimplify[C1 - C2]
+
+0
+
+C3>C1 since xi in (0,1) for all i
+
+FullSimplify[C3 - C1]
+
+-x1 (-1 + x2^2) x3 x4 x5
+
+C3>C2 since xi in (0,1) for all i
+
+FullSimplify[C3 - C2]
+
+-x1 (-1 + x2^2) x3 x4 x5
+
+(o,(b,(a,c)))
+
+C1 = FullSimplify[
+  f0011*f1100 /. {x6 -> 1, x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x3 x4 x5
+
+C2 = FullSimplify[
+  f0110*f1001 /. {x6 -> 1, x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2^2 x3 x4 x5
+
+C3 = FullSimplify[
+  f0101*f1010 /. {x6 -> 1, x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2^2 x3 x4 x5
+
+C2=C3
+
+FullSimplify[C2 - C3]
+
+0
+
+C1>C2 since xi in (0,1) for all i
+
+FullSimplify[C1 - C2]
+
+-x1 (-1 + x2^2) x3 x4 x5
+
+C1>C3 since xi in (0,1) for all i
+
+FullSimplify[C1 - C3]
+
+-x1 (-1 + x2^2) x3 x4 x5
+
+(o,(c,(a,b)))
+
+C1 = FullSimplify[
+  f0110*f1001 /. {x6 -> 1, x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2^2 x3 x4 x5
+
+C2 = FullSimplify[
+  f0011*f1100 /. {x6 -> 1, x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x3 x4 x5
+
+C3 = FullSimplify[
+  f0101*f1010 /. {x6 -> 1, x7 -> 1, x8 -> 1, x9 -> 1, x10 -> 1, x11 -> 1}]
+
+x1 x2^2 x3 x4 x5
+
+C1=C3
+
+FullSimplify[C1 - C3]
+
+0
+
+C2>C1 since xi in (0,1) for all i
+
+FullSimplify[C2 - C1]
+
+-x1 (-1 + x2^2) x3 x4 x5
+
+C2>C3 since xi in (0,1) for all i
+
+FullSimplify[C2 - C3]
+
+-x1 (-1 + x2^2) x3 x4 x5
